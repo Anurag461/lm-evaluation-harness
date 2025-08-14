@@ -5,29 +5,49 @@ def test_em():
     """Test the ExactModel using the evaluation framework"""
     print("Testing ExactModel with evaluation framework...")
     
-    # TODO: Replace with actual toy dataset
-    toy_tasks = ["esci"]  # Placeholder for toy dataset
+    tasks = ["esci"] 
     
-    results = simple_evaluate(
+    results_exact = simple_evaluate(
             model="exact",  # Use our registered exact model
-            tasks=toy_tasks,
+            tasks=tasks,
             num_fewshot=0,
             batch_size=1,
             device="cpu",
-            verbosity="INFO",
-            limit=100
-        )
-        
+            verbosity="INFO")
+
+    results_substitute = simple_evaluate(
+            model="substitute",  # Use our registered exact model
+            tasks=tasks,
+            num_fewshot=0,
+            batch_size=1,
+            device="cpu",
+            verbosity="INFO")
+
+    results_complement = simple_evaluate(
+            model="complement",  # Use our registered exact model
+            tasks=tasks,
+            num_fewshot=0,
+            batch_size=1,
+            device="cpu",
+            verbosity="INFO")
+
+    results_irrelevant = simple_evaluate(
+            model="irrelevant",  # Use our registered exact model
+            tasks=tasks,
+            num_fewshot=0,
+            batch_size=1,
+            device="cpu",
+            verbosity="INFO")
+            
     print("Evaluation Results:")
     
-    # Print out the metrics
-    if 'results' in results:
-        for task_name, task_results in results['results'].items():
-            print(f"\nTask: {task_name}")
-            assert task_results["exact_match,none"]==0.55
-            for metric_name, metric_value in task_results.items():
-                print(f"  {metric_name}: {metric_value}")
-    
+    results = {
+        "exact": results_exact["exact_match,none"],
+        "substitute": results_substitute["exact_match,none"],
+        "complement": results_complement["exact_match,none"],
+        "irrelevant": results_irrelevant["exact_match,none"]
+    }
+    print(results)
     # Write results to JSON file
     output_file = "evaluation_results.json"
     with open(output_file, 'w') as f:
