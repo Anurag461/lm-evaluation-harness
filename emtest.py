@@ -42,10 +42,10 @@ def test_em():
     print("Evaluation Results:")
     
     results = {
-        "exact": results_exact["results"]["exact_match,none"],
-        "substitute": results_substitute["results"]["exact_match,none"],
-        "complement": results_complement["results"]["exact_match,none"],
-        "irrelevant": results_irrelevant["results"]["exact_match,none"]
+        "exact": results_exact["results"]["esci"]["exact_match,none"],
+        "substitute": results_substitute["results"]["esci"]["exact_match,none"],
+        "complement": results_complement["results"]["esci"]["exact_match,none"],
+        "irrelevant": results_irrelevant["results"]["esci"]["exact_match,none"]
     }
     print(results)
     # Write results to JSON file
