@@ -23,7 +23,7 @@ def test_em():
     if 'results' in results:
         for task_name, task_results in results['results'].items():
             print(f"\nTask: {task_name}")
-            assert task_results["exact_match,none"]=0.55
+            assert task_results["exact_match,none"]==0.55
             for metric_name, metric_value in task_results.items():
                 print(f"  {metric_name}: {metric_value}")
     
