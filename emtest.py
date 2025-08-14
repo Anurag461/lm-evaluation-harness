@@ -1,3 +1,4 @@
+from lm_eval.evaluator import simple_evaluate
 import json
 
 def test_em():
