@@ -53,8 +53,8 @@ lm-eval = "lm_eval.__main__:cli_evaluate"
 lm_eval = "lm_eval.__main__:cli_evaluate"
 
 [project.urls]
-Homepage = "https://github.com/EleutherAI/lm-evaluation-harness"
-Repository = "https://github.com/EleutherAI/lm-evaluation-harness"
+Homepage = "https://github.com/Anurag461/lm-evaluation-harness"
+Repository = "https://github.com/Anurag461/lm-evaluation-harness"
 
 [project.optional-dependencies]
 acpbench = ["lark>=1.1.9", "tarski[clingo]==0.8.2", "pddl==0.4.2", "kstar-planner==1.4.2"]
