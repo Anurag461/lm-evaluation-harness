@@ -1,38 +1,14 @@
 from lm_eval.evaluator import simple_evaluate
 import json
+import argparse  
 
-def test_em():
-    """Test the ExactModel using the evaluation framework"""
-    print("Testing ExactModel with evaluation framework...")
+def test_escitask(model):  
+    print(f"Testing {model} with evaluation framework...")  
     
     tasks = ["esci"] 
     
     results_exact = simple_evaluate(
-            model="exact",  # Use our registered exact model
-            tasks=tasks,
-            num_fewshot=0,
-            batch_size=1,
-            device="cpu",
-            verbosity="INFO")
-
-    results_substitute = simple_evaluate(
-            model="substitute",  # Use our registered exact model
-            tasks=tasks,
-            num_fewshot=0,
-            batch_size=1,
-            device="cpu",
-            verbosity="INFO")
-
-    results_complement = simple_evaluate(
-            model="complement",  # Use our registered exact model
-            tasks=tasks,
-            num_fewshot=0,
-            batch_size=1,
-            device="cpu",
-            verbosity="INFO")
-
-    results_irrelevant = simple_evaluate(
-            model="irrelevant",  # Use our registered exact model
+            model=model, 
             tasks=tasks,
             num_fewshot=0,
             batch_size=1,
@@ -42,19 +18,17 @@ def test_em():
     print("Evaluation Results:")
     
     results = {
-        "exact": results_exact["results"]["esci"]["exact_match,none"],
-        "substitute": results_substitute["results"]["esci"]["exact_match,none"],
-        "complement": results_complement["results"]["esci"]["exact_match,none"],
-        "irrelevant": results_irrelevant["results"]["esci"]["exact_match,none"]
+        model: results_exact["results"]["esci"]["exact_match,none"]
     }
     print(results)
-    # Write results to JSON file
-    output_file = "evaluation_results.json"
+    
+    output_file = f"evaluation_results_{model}.json"
     with open(output_file, 'w') as f:
         json.dump(results, f, indent=2)
     print(f"\nResults written to {output_file}")
     
-    print("Evaluation test completed.\n")
-
-print("hello world")
-test_em()
+if __name__ == "__main__":  
+    parser = argparse.ArgumentParser(description="Evaluate a model on the ESCI task.")
+    parser.add_argument("model", type=str, help="The model to evaluate.")
+    args = parser.parse_args()
+    test_escitask(args.model)
